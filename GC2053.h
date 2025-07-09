@@ -45,6 +45,7 @@ bool GC2053_SetExpo(struct GC2053_Platform *p, int value);
 bool GC2053_SetIntegrationTime(struct GC2053_Platform *p, int value);
 bool GC2053_SetAnalogGain(struct GC2053_Platform *p, int value);
 bool GC2053_SetDigitalGain(struct GC2053_Platform *p, int value);
+bool GC2053_SetAutoPregain(struct GC2053_Platform *p, int value_64x);
 bool GC2053_GetBlackPedestal(struct GC2053_Platform *p, int *value);
 
 bool GC2053_Init(struct GC2053_Platform *p, enum GC2053_Mode mode);

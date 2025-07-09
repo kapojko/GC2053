@@ -1266,6 +1266,23 @@ bool GC2053_SetAnalogGain(struct GC2053_Platform *p, int value)
     return true;
 }
 
+bool GC2053_SetAutoPregain(struct GC2053_Platform *p, int value_64x) {
+    int ret = 0;
+
+    // 4.6 precision, more likely 4bits integer and 6bits fraction fixed-point format
+    uint8_t intPart = value_64x >> 6;
+    uint8_t fracPart = value_64x & 0x3f;
+
+    ret = p->sccbWriteReg(p->id, 0xfe, 0x00);
+    ret += p->sccbWriteReg(p->id, 0xb1, intPart);
+    ret += p->sccbWriteReg(p->id, 0xb2, fracPart << 2);
+    if (ret < 0) {
+        return false;
+    }
+
+    return true;
+}
+
 bool GC2053_SetDigitalGain(struct GC2053_Platform *p, int value)
 {
     return false;
